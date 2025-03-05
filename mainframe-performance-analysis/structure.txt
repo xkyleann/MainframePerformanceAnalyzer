@@ -1,0 +1,23 @@
+mainframe-performance-analysis/
+│
+├── data/
+│   ├── smf_30.csv (Bad Performance)
+│   ├── smf_70.csv (Good Performance)
+│   ├── smf_72.csv (Good Performance)
+│   ├── simulated_data.csv (Mixed Good & Bad Performance)
+│
+├── static/
+│   └── css/
+│       └── style.css
+│
+├── templates/
+│   └── index.html
+│
+├── main.py
+├── requirements.txt
+
+-------------------------------------------
+
+0 = Bad Performance (High CPU & Memory, Low Throughput)
+1 = Medium Performance
+2 = Good Performance (Low CPU & Memory, High Throughput)

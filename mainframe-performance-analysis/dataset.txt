@@ -1,0 +1,3 @@
+0 = Bad Performance (High CPU & Memory, Low Throughput)
+1 = Medium Performance
+2 = Good Performance (Low CPU & Memory, High Throughput)

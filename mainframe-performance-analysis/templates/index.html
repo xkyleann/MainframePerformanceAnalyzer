@@ -1,0 +1,237 @@
+<!DOCTYPE html> 
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mainframe Performance Analyzer</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
+
+    
+    <style>
+
+        body {
+            background-color: #f4f7fc;
+            color: #333;
+            font-family: "Arial", sans-serif;
+        }
+
+        .container {
+            max-width: 900px;
+        }
+
+
+        .card {
+            background-color: #ffffff;
+            border-radius: 10px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+            transition: transform 0.2s ease-in-out;
+        }
+
+        .card:hover {
+            transform: scale(1.01);
+        }
+
+        .card-title {
+            color: #0056b3;
+            font-weight: bold;
+        }
+
+
+        .form-control {
+            background-color: #ffffff;
+            color: #333;
+            border: 1px solid #ccd6eb;
+            transition: border 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+        }
+
+        .form-control:focus {
+            border-color: #0078D4;
+            box-shadow: 0 0 8px rgba(0, 120, 212, 0.5);
+        }
+
+
+        .btn-custom {
+            background-color: #0078D4;
+            color: white;
+            border-radius: 6px;
+            padding: 12px;
+            font-weight: bold;
+            border: none;
+            transition: all 0.3s ease-in-out;
+        }
+
+        .btn-custom:hover {
+            background-color: #0056b3;
+            transform: translateY(-2px);
+            box-shadow: 0px 5px 10px rgba(0, 86, 179, 0.4);
+        }
+
+        .btn-secondary {
+            background-color: #17a2b8;
+            color: white;
+            border-radius: 6px;
+            padding: 12px;
+            font-weight: bold;
+            border: none;
+            transition: all 0.3s ease-in-out;
+        }
+
+        .btn-secondary:hover {
+            background-color: #138496;
+            transform: translateY(-2px);
+            box-shadow: 0px 5px 10px rgba(23, 162, 184, 0.4);
+        }
+
+
+        .table th {
+            background-color: #0078D4;
+            color: white;
+        }
+
+
+        .collapsible-header {
+            cursor: pointer;
+            font-weight: bold;
+            color: #0056b3;
+            padding: 10px;
+            background-color: #e3ebf6;
+            border-radius: 6px;
+            transition: background 0.3s ease-in-out;
+        }
+
+        .collapsible-header:hover {
+            background-color: #cdd9f0;
+        }
+
+        .collapsible-content {
+            display: none;
+            padding: 15px;
+            background-color: #f0f4fb;
+            border-radius: 6px;
+            margin-top: 5px;
+        }
+    </style>
+
+<script>
+    function toggleCollapsible(id) {
+        var content = document.getElementById(id);
+        content.style.display = content.style.display === "none" ? "block" : "none";
+    }
+
+    function previewFileName(input) {
+        const fileName = input.files[0]?.name || "No file chosen";
+        document.getElementById("file-name").innerText = fileName;
+    }
+
+    function toggleDarkMode() {
+        document.body.classList.toggle("dark-mode");
+    }
+
+    function validateInput(input) {
+        if (input.value < 0 || input.value > 100) {
+            input.classList.add("is-invalid");
+        } else {
+            input.classList.remove("is-invalid");
+        }
+    }
+</script>
+
+</head>
+<body>
+
+    <div class="container mt-5">
+        <h1 class="text-center text-primary">Mainframe Performance Analyzer</h1>
+        <p class="text-center text-muted">Analyze & Optimize Your System Performance</p>
+
+        <!-- Upload Form -->
+        <div class="card shadow mt-4">
+            <div class="card-body">
+                <h4 class="card-title"><i class="bi bi-upload" style="margin-right: 7px;"></i>Upload Performance Data</h4>
+                <form action="/" method="post" enctype="multipart/form-data">
+                    <input type="file" name="file" class="form-control" required>
+                    <button type="submit" name="submit_file" class="btn btn-custom w-100 mt-3">Upload & Analyze</button>
+                </form>
+            </div>
+        </div>
+
+        <!--  Issues  -->
+        {% if issues %}
+        <div class="card shadow mt-4">
+            <div class="card-body">
+                <h4 class="card-title text-danger"> <i class="bi bi-exclamation-triangle-fill" style="margin-right: 7px;"></i>Performance Issues Detected</h4>
+                <table class="table table-hover mt-3">
+                    <thead>
+                        <tr>
+                            <th>Timestamp</th>
+                            <th>Issues</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for issue in issues %}
+                        <tr>
+                            <td>{{ issue.Timestamp }}</td>
+                            <td>{{ issue.Issues }}</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        {% endif %}
+
+        <!-- performance Evaluation -->
+        <div class="card shadow mt-4">
+            <div class="card-body">
+                <h4 class="card-title"><i class="bi bi-graph-up" style="margin-right: 7px;"></i>Evaluate System Performance</h4>
+
+                <div class="collapsible-header" onclick="toggleCollapsible('inputMetrics')">
+                    <i class="bi bi-info-circle"></i> Show Input Guidelines ▼
+                </div>
+                <div class="collapsible-content" id="inputMetrics">
+                    <ul class="mt-2">
+                        <li><strong>CPU Utilization (%):</strong> Low (10-40%), Normal (40-80%), High (80-100%)</li>
+                        <li><strong>Memory Usage (%):</strong> Low (10-50%), Normal (50-80%), High (80-100%)</li>
+                        <li><strong>Transaction Throughput (transactions/sec):</strong> Low (< 3000), Normal (3000-5000), High (> 5000)</li>
+                    </ul>
+                </div>
+
+                <form action="/" method="post">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <label class="form-label"><i class="bi bi-cpu"></i> CPU Utilization (%):</label>
+                            <input type="number" step="0.1" name="cpu_utilization" class="form-control" required>
+                        </div>
+                        <div class="col-md-4">
+                            <label class="form-label"><i class="bi bi-memory" style="margin-right: 5px;"></i> Memory Usage (%):</label>
+                            <input type="number" step="0.1" name="memory_usage" class="form-control" required>
+                        </div>
+                        <div class="col-md-4">
+                            <label class="form-label"><i class="bi bi-speedometer" style="margin-right: 5px;"></i> Transaction Throughput (transactions/sec):</label>
+                            <input type="number" step="0.1" name="transaction_throughput" class="form-control" required>
+                        </div>
+                    </div>
+                    <button type="submit" name="submit_evaluate" class="btn btn-secondary w-100 mt-3">
+                        <i class="bi bi-bar-chart-line"></i> Evaluate Performance
+                    </button>
+                </form>
+            </div>
+        </div>
+
+        <!--  Results -->
+        {% if overall_status %}
+        <div class="alert alert-info mt-4">
+            <h4>Performance Evaluation:</h4>
+            <ul>
+                <li>CPU Status: <strong>{{ cpu_status }}</strong></li>
+                <li>Memory Status: <strong>{{ memory_status }}</strong></li>
+                <li>Throughput Status: <strong>{{ throughput_status }}</strong></li>
+                <li><strong>Overall System Status:</strong> {{ overall_status }}</li>
+            </ul>
+        </div>
+        {% endif %}
+    </div>
+
+</body>
+</html>
