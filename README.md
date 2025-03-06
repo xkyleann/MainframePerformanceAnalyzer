@@ -8,8 +8,6 @@ Code has to include:
 - Read performance from SMF records.
 - Simulate CPU usage, memory usage, and throughput values.
 - Writes metrics to .txt file
-- Disk I/O operations (?)
-- Network utilization (?)
 
 2. **Python program** to process the dataset and build a basic machine learning model.
 Code has to include:
@@ -17,6 +15,5 @@ Code has to include:
 - train a simple ML model to predict transaction throughput based on CPU and memory usage.
 - For predicting transaction throughput **RandomForestGenerator** can be used.
 - For model's performance **Mean Squared Error (MSE)**
-- Disk I/O operations (?)
-- Network utilization (?)
+
 
