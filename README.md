@@ -14,6 +14,9 @@ This project uses machine learning methods, mainly **Random Forest** and **Linea
   - Offers comparison plots across different resources
 
 
+## 📁 Project Structure
+
+```
 mainframe-performance-analysis/
 │
 ├── data/                            # 📊 Datasets used for model training & evaluation
@@ -41,3 +44,5 @@ mainframe-performance-analysis/
 ├── main.py                          # 🚀 Main Python app (Flask + ML logic)
 ├── requirements.txt                 # 📦 Python dependencies list
 └── README.md                        # 📘 Project documentation
+```
+
