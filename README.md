@@ -19,30 +19,47 @@ This project uses machine learning methods, mainly **Random Forest** and **Linea
 ```
 mainframe-performance-analysis/
 │
-├── data/                            # 📊 Datasets used for model training & evaluation
-│   ├── smf_30.csv                   # ⛔ Realistic – Bad performance data
-│   ├── smf_70.csv                   # ✅ Realistic – Good performance data
-│   ├── smf_72.csv                   # ✅ Realistic – Good performance data
-│   ├── Realistic_Mainframe_Performance_Dataset.csv  # ✅ Full realistic dataset
-│   ├── test_indicates.txt           # 📋 Test indicators or labels
-│   └── simulated_data.csv           # 🧪 Simulated – Mixed performance
+├── data/                            
+│   ├── smf_30.csv                   
+│   ├── smf_70.csv                 
+│   ├── smf_72.csv                  
+│   ├── Realistic_Mainframe_Performance_Dataset.csv  
+│   ├── test_indicates.txt           
+│   └── simulated_data.csv          
 │
-├── Matlab/                          # 📈 MATLAB analysis and visualizations
-│   ├── Comparision.m                # 📊 Performance comparison plot
-│   ├── CPU_Real.m                   # 🧠 Real-world CPU performance analysis
-│   ├── CPU_Simulated.m              # 🧪 Simulated CPU analysis
-│   ├── Memory_Real.m                # 💾 Real-world memory analysis
-│   └── Memory_Simulated.m           # 💾 Simulated memory analysis
-│
-├── static/                          # 🎨 Static assets for web UI
+├── static/                       
 │   └── css/
-│       └── style.css                # 🌈 Custom CSS styles
+│       └── style.css             
 │
-├── templates/                       # 🖼 HTML templates used by Flask
-│   └── index.html                   # 🌍 Main user interface
+├── templates/                       
+│   └── index.html                   
 │
-├── main.py                          # 🚀 Main Python app (Flask + ML logic)
-├── requirements.txt                 # 📦 Python dependencies list
-└── README.md                        # 📘 Project documentation
+├── main.py                          
+├── requirements.txt               
+└── README.md                       
 ```
+
+## ML Training 
+
+In the funtion:
+```python
+def train_models(data):
+```
+- Trainf two types of regression models, `LinearRegression` (from `sklearn.linear_model`) and `RandomForestRegressor` (from `sklearn.ensemble`)
+- Targets are `CPU_Utilization`, `Memory_Usage` and `Transaction_Throughput`
+
+They calculate Mean Squared Error (MSE) for each model/target combination and make predictions for both target variables using both models.
+
+## 📌 Summary
+
+| Feature                     | Present in code? |
+|----------------------------|------------------|
+| Trains ML models           | ✅ Yes           |
+| Uses `scikit-learn` models | ✅ Yes           |
+| Trains on uploaded data    | ✅ Yes           |
+| Saves/tracks models        | ❌ No            |
+| Does inference             | ✅ Yes           |
+| Evaluates model performance| ✅ Yes (MSE)     |
+
+
 
