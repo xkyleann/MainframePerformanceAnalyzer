@@ -48,7 +48,8 @@ def train_models(data):
 - Trainf two types of regression models, `LinearRegression` (from `sklearn.linear_model`) and `RandomForestRegressor` (from `sklearn.ensemble`)
 - Targets are `CPU_Utilization`, `Memory_Usage` and `Transaction_Throughput`
 
-They calculate Mean Squared Error (MSE) for each model/target combination and make predictions for both target variables using both models.
+They calculate Mean Squared Error (MSE) for each model/target combination and make predictions for both target variables using both models. When it trains, the training happens when a user uploads a CSV file via the web interface. So flow has to start with user upload a `.csv` file, Flask saves the file and calls `analyze_data()`, then inside `analyze_data()`, `train_models(data)` is called and in the end ML models are trained and evulated in the uploaded data. 
+
 
 ## 📌 Summary
 
