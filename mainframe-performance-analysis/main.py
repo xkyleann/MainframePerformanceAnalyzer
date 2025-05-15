@@ -74,7 +74,6 @@ def train_models(data):
 
 
 def analyze_data(file_path):
-    """Analyze uploaded CSV data for performance issues and apply ML models."""
     try:
         data = pd.read_csv(file_path)
 
@@ -111,7 +110,6 @@ def analyze_data(file_path):
 
 
 def evaluate_performance(cpu, memory, throughput):
-    """Evaluate system performance based on thresholds."""
     cpu_status = "Good" if 10 <= cpu <= CPU_THRESHOLD else "Bad (High CPU Usage)" if cpu > CPU_THRESHOLD else "Bad (Too Low CPU Usage)"
     memory_status = "Good" if 10 <= memory <= MEMORY_THRESHOLD else "Bad (High Memory Usage)" if memory > MEMORY_THRESHOLD else "Bad (Too Low Memory Usage)"
     throughput_status = "Good (Above Minimum Throughput Threshold)" if throughput >= TRANSACTION_THRESHOLD else f"Bad (Low Transaction Throughput - Threshold: {TRANSACTION_THRESHOLD} transactions/sec)"
